@@ -1,0 +1,40 @@
+<%- include('./partials/header') %> 
+    <div class="container">
+    <h1>URL Shrinker</h1>
+        <form action="/shortUrls" method="POST" class="my-4">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                <div class="mb-3">
+                    <label for="fullUrl" class="visually-hidden">Url</label>
+                    <input type="url" name="fullUrl" id="fullUrl" class="form-control" placeholder="Url" required>
+                </div>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Shrink</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Full Url</th>
+                        <th>Short Url</th>
+                        <th>Clicks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% shortUrls.forEach(shortUrl => { %> 
+                        <tr>
+                            <td><a href="<%= shortUrl.full %> "><%= shortUrl.full %></a></td>
+                            <td><a href="<%= shortUrl.short %>"><%= shortUrl.short %></a></td>
+                            <td><%= shortUrl.clicks %></td>
+                        </tr>
+                    <% }) %> 
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+<%- include('./partials/footer') %> 

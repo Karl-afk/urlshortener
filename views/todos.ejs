@@ -1,0 +1,42 @@
+<%- include('./partials/header') %> 
+<div class="container">
+    <h1>Todos</h1>
+    <form action="/todos/newTodo" method="POST" class="row" >
+        <div class="col-md-6 col-sm-12">
+            <label class="visually-hidden" for="todo">Todo</label>
+            <input type="text" class="form-control" name="todo" id="todo" placeholder="Todo for today">
+        </div>
+        <div class="col-6 mt-sm-4 mt-md-0">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    <% if (todos.length > 0) { %>
+        
+        <% todos.forEach(element => { %>
+            <div class="card my-4">
+                <div class="card-body">
+                    <div class="row">
+                        <form action="/todos/editTodo/<%= element.id %>" method="POST" class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <input type="text" name="todo" class="form-control" placeholder="<%= element.todo %>">
+                                </div>
+                                <div class="col-1 d-grid">
+                                    <button type="submit" class="btn btn-success"><i class="bi bi-check-lg"></i></button>
+                                </div> 
+                            </div>
+                        </form>
+                        <form action="/todos/deleteTodo/<%= element.id %>" method="post" clasS="col-1 d-grid">
+                            <button type="submit" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <% }) %>       
+            <% } else { %>
+                <p>Keine Todos mehr übrig</p> 
+    <% } %>
+</div>
+
+
+<%- include('./partials/footer') %> 
